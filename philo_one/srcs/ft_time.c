@@ -12,7 +12,6 @@
 
 #include "ft_philosophers.h"
 
-
 long	ft_get_time(void)
 {
 	struct timeval	time;
@@ -21,9 +20,9 @@ long	ft_get_time(void)
 	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000));
 }
 
-void    ft_usleep_fix(long time)
+void	ft_usleep_fix(long time)
 {
-	long t;
+	long	t;
 
 	t = ft_get_time();
 	while (ft_get_time() - t < time)

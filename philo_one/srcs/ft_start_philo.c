@@ -12,58 +12,52 @@
 
 #include "ft_philosophers.h"
 
-static void ft_init_forks(t_philo *philo)
+static void	ft_init_forks(t_philo *philo)
 {
-    if (philo->num  == 0)
-        philo->fork_l = philo->param->num_philo - 1;
-    else
-        philo->fork_l = philo->num - 1;
-    if (philo->num == philo->param->num_philo - 1)
-        philo->fork_r = 0;
-    else
-        philo->fork_r = philo->num; 
+	if (philo->num == 0)
+		philo->fork_l = philo->param->num_philo - 1;
+	else
+		philo->fork_l = philo->num - 1;
+	if (philo->num == philo->param->num_philo - 1)
+		philo->fork_r = 0;
+	else
+		philo->fork_r = philo->num;
 }
 
-void    ft_take_forks(t_philo *philo)
+void	ft_take_forks(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    while(philo->param->fork_status[philo->fork_l] == busy
-        || philo->param->fork_status[philo->fork_r] == busy)
-        ;
-    //ft_usleep_fix(2);
-    time = ft_get_time();
-    // printf("time :\t\t%ld\n",time);
-    // printf("Last eat:\t%ld\n",philo->time_last_eat);
-    if (time - philo->time_last_eat > philo->param->time_to_die)
-    {
-        ft_print_die(philo);
-        return ;
-    }    
-    philo->param->fork_status[philo->fork_l] = busy;
-    philo->param->fork_status[philo->fork_r] = busy;    
-    pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_l]);
-    pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_r]);
-    ft_print_forks(philo);
-    ft_print_eating(philo);
-    ft_usleep_fix(philo->param->time_to_eat);
-    philo->cnt_eatings++;
-    philo->time_last_eat = ft_get_time();
-    pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
-    pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
-    philo->param->fork_status[philo->fork_l] = available;
-    philo->param->fork_status[philo->fork_r] = available;
-    if (philo->param->cnt_eat != -1 && philo->cnt_eatings == philo->param->cnt_eat)
-        return ;
-    ft_philo_sleep(philo);
+	pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_l]);
+	pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_r]);
+	time = ft_get_time();
+	if (time - philo->time_last_eat > philo->param->time_to_die)
+	{
+		ft_print_die(philo);
+		philo->param->live = 0;
+		pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
+		pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
+		return ;
+	}
+	ft_print_forks(philo);
+	ft_print_eating(philo);
+	ft_usleep_fix(philo->param->time_to_eat);
+	philo->cnt_eatings++;
+	philo->time_last_eat = ft_get_time();
+	pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
+	pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
+	if (philo->param->cnt_eat != -1
+		&& philo->cnt_eatings == philo->param->cnt_eat)
+		return ;
+	ft_philo_sleep(philo);
 }
 
-void    *ft_start_philo(void *ptr)
+void	*ft_start_philo(void *ptr)
 {
-    t_philo *philo;
+	t_philo	*philo;
 
-    philo = ptr;
-    ft_init_forks(philo);
-    ft_take_forks(philo);
-    return (NULL);
+	philo = ptr;
+	ft_init_forks(philo);
+	ft_take_forks(philo);
+	return (NULL);
 }

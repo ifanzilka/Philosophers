@@ -12,20 +12,21 @@
 
 #include "ft_philosophers.h"
 
-
-
-void    ft_philo_sleep(t_philo *philo)
+void	ft_philo_sleep(t_philo *philo)
 {
-    ft_print_sleep(philo);
-    if (philo->param->time_to_sleep > philo->param->time_to_die)
-    {
-        ft_usleep_fix(philo->param->time_to_die);
-        ft_print_die(philo);
-        return ;
-    }
-    else
-    {
-        ft_usleep_fix(philo->param->time_to_sleep);
-        ft_philo_thinking(philo);
-    }
+	ft_print_sleep(philo);
+	if (philo->param->time_to_sleep > philo->param->time_to_die)
+	{
+		ft_usleep_fix(philo->param->time_to_die);
+		ft_print_die(philo);
+		philo->param->live = 0;
+		pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
+		pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
+		return ;
+	}
+	else
+	{
+		ft_usleep_fix(philo->param->time_to_sleep);
+		ft_philo_thinking(philo);
+	}	
 }

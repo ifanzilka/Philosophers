@@ -12,54 +12,67 @@
 
 #include "ft_philosophers.h"
 
-
-void    ft_print_forks(t_philo *philo)
+void	ft_print_forks(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    pthread_mutex_lock(&philo->param->mutex_print);
-    time = ft_get_time();
-    printf("%ld\tPhilo %d  has taken a fork\n",time - philo->param->start_time, philo->num + 1);
-    pthread_mutex_unlock(&philo->param->mutex_print);
+	if (philo->param->live != 1)
+		return ;
+	pthread_mutex_lock(&philo->param->mutex_print);
+	time = ft_get_time();
+	printf("%ld\tPhilo %d  has taken a fork\n", time - philo->param->start_time,
+		philo->num + 1);
+	pthread_mutex_unlock(&philo->param->mutex_print);
 }
 
-
-void    ft_print_eating(t_philo *philo)
+void	ft_print_eating(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    pthread_mutex_lock(&philo->param->mutex_print);
-    time = ft_get_time();
-    printf("%ld\tPhilo %d  is eating\n",time - philo->param->start_time, philo->num + 1);
-    pthread_mutex_unlock(&philo->param->mutex_print);
+	if (philo->param->live != 1)
+		return ;
+	pthread_mutex_lock(&philo->param->mutex_print);
+	time = ft_get_time();
+	printf("%ld\tPhilo %d  is eating\n", time - philo->param->start_time,
+		philo->num + 1);
+	pthread_mutex_unlock(&philo->param->mutex_print);
 }
 
-void    ft_print_thinking(t_philo *philo)
+void	ft_print_thinking(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    pthread_mutex_lock(&philo->param->mutex_print);
-   time = ft_get_time();
-    printf("%ld\tPhilo %d  is thinking\n",time - philo->param->start_time, philo->num + 1);
-    pthread_mutex_unlock(&philo->param->mutex_print);
+	if (philo->param->live != 1)
+		return ;
+	pthread_mutex_lock(&philo->param->mutex_print);
+	time = ft_get_time();
+	printf("%ld\tPhilo %d  is thinking\n", time - philo->param->start_time,
+		philo->num + 1);
+	pthread_mutex_unlock(&philo->param->mutex_print);
 }
 
-void    ft_print_sleep(t_philo *philo)
+void	ft_print_sleep(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    pthread_mutex_lock(&philo->param->mutex_print);
-    time = ft_get_time();
-    printf("%ld\tPhilo %d  is sleep\n",time - philo->param->start_time, philo->num + 1);
-    pthread_mutex_unlock(&philo->param->mutex_print);
+	if (philo->param->live != 1)
+		return ;
+	pthread_mutex_lock(&philo->param->mutex_print);
+	time = ft_get_time();
+	printf("%ld\tPhilo %d  is sleep\n", time - philo->param->start_time,
+		philo->num + 1);
+	pthread_mutex_unlock(&philo->param->mutex_print);
 }
 
-void    ft_print_die(t_philo *philo)
+void	ft_print_die(t_philo *philo)
 {
-    long time;
+	long	time;
 
-    pthread_mutex_lock(&philo->param->mutex_print);
-    time = ft_get_time();
-    printf("\033[31m%ld\tPhilo %d died\n\033[37m",time - philo->param->start_time, philo->num + 1);
-    pthread_mutex_unlock(&philo->param->mutex_print);
+	if (philo->param->live != 1)
+		return ;
+	pthread_mutex_lock(&philo->param->mutex_print);
+	time = ft_get_time();
+	printf("\033[31m%ld\tPhilo %d died\n\033[37m", time - philo->param->start_time,
+		philo->num + 1);
+	pthread_mutex_unlock(&philo->param->mutex_print);
 }

@@ -18,10 +18,10 @@
 # include <stdlib.h>
 # include <sys/time.h>
 
-typedef pthread_mutex_t t_mutex;
-typedef struct timeval	t_timeval;
+typedef pthread_mutex_t	t_mutex;
 typedef struct s_ph_param
 {
+	int			live;
 	int			num_philo;
 	int			num_forks;
 	int			time_to_die;
@@ -38,16 +38,13 @@ typedef struct s_philo
 {
 	pthread_t	thread;
 	t_ph_param	*param;
-	int 		num;
+	int			num;
 	int			status;
 	int			fork_l;
-	int 		fork_r;
+	int			fork_r;
 	long		time_last_eat;
 	int			cnt_eatings;
 }				t_philo;
-
-t_philo		*arr_philo;
-int			*forks;
 
 enum			 e_status
 {
@@ -83,23 +80,32 @@ int		ft_isdigit(int ch);
 int		ft_atoi(const char *ptr);
 int		ft_parse(int argc, char **argv, t_ph_param *philo);
 
+/*
+** Init
+*/
 
-
-void    ft_cr_th_philo(t_ph_param *ph_param);
-void    *ft_start_philo(void *ptr);
+void	ft_cr_th_philo(t_ph_param *ph_param);
+void	*ft_start_philo(void *ptr);
+void	ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param);
 long	ft_get_time(void);
-void    ft_usleep_fix(long time);
+void	ft_usleep_fix(long time);
 
-void    ft_print_forks(t_philo *philo);
-void    ft_print_eating(t_philo *philo);
-void    ft_print_thinking(t_philo *philo);
+/*
+** Print
+*/
+
+void	ft_print_forks(t_philo *philo);
+void	ft_print_eating(t_philo *philo);
+void	ft_print_thinking(t_philo *philo);
 void	ft_print_sleep(t_philo *philo);
-void    ft_print_die(t_philo *philo);
+void	ft_print_die(t_philo *philo);
 
-void    ft_take_forks(t_philo *philo);
-void    ft_philo_sleep(t_philo *philo);
-void    ft_philo_thinking(t_philo *philo);
+/*
+** Philo
+*/
 
-void    ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param);
+void	ft_take_forks(t_philo *philo);
+void	ft_philo_sleep(t_philo *philo);
+void	ft_philo_thinking(t_philo *philo);
 
 #endif

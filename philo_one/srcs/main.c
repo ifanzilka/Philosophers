@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		{
 			if (ft_parse(argc, argv, &ph_param) == 1)
 				return (ft_errors(parse_err));
-			ft_cr_th_philo(&ph_param);	
+			ft_cr_th_philo(&ph_param);
 		}	
 	}
 	return (0);
