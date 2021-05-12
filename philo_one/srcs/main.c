@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_ph_param	ph_param;
 
-	if (argc < 4 || argc > 5)
+	if (argc < 5 || argc > 6)
 		return (ft_errors(argv_err));
 	else
 	{

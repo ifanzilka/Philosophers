@@ -83,10 +83,8 @@ static int ft_create_threads(t_philo *arr_philo, t_ph_param *ph_param, int cnt)
 void    ft_cr_th_philo(t_ph_param *ph_param)
 {
     t_philo *arr_philo;
-    int     i;
     int     res;
 
-    i = 0;
     //printf("num_ph: %d\n", ph_param->num_philo);
     arr_philo = malloc(sizeof(t_philo) * ph_param->num_philo);
     ph_param->mutex_forks = malloc(sizeof(t_mutex) * ph_param->num_philo);

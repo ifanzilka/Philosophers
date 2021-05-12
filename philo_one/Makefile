@@ -16,7 +16,7 @@ CC		= gcc
 
 HEADERS	= ./includes
 
-FLAGS	= -Wall -Wextra -Werror 
+FLAGS	= -Wall -Wextra -Werror -pthread 
 
 OBJS	= $(SRCS:.c=.o)
 
