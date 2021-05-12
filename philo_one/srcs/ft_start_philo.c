@@ -12,14 +12,6 @@
 
 #include "ft_philosophers.h"
 
-long  ft_get_usec()
-{
-    t_timeval	timeeval;
-    
-    gettimeofday(&timeeval, NULL);
-    return (timeeval.tv_usec);
-}
-
 static void ft_init_forks(t_philo *philo)
 {
     if (philo->num  == 0)
@@ -34,21 +26,33 @@ static void ft_init_forks(t_philo *philo)
 
 void    ft_take_forks(t_philo *philo)
 {
+    long time;
+
     while(philo->param->fork_status[philo->fork_l] == busy
         || philo->param->fork_status[philo->fork_r] == busy)
         ;
+    //ft_usleep_fix(2);
+    time = ft_get_time();
+    // printf("time :\t\t%ld\n",time);
+    // printf("Last eat:\t%ld\n",philo->time_last_eat);
+    if (time - philo->time_last_eat > philo->param->time_to_die)
+    {
+        ft_print_die(philo);
+        return ;
+    }    
     philo->param->fork_status[philo->fork_l] = busy;
     philo->param->fork_status[philo->fork_r] = busy;    
     pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_l]);
     pthread_mutex_lock(&philo->param->mutex_forks[philo->fork_r]);
-    
     ft_print_forks(philo);
     ft_print_eating(philo);
-    usleep(philo->param->time_to_eat * 1000);
+    ft_usleep_fix(philo->param->time_to_eat);
+    philo->time_last_eat = ft_get_time();
     pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
     pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
     philo->param->fork_status[philo->fork_l] = available;
     philo->param->fork_status[philo->fork_r] = available;
+    ft_philo_sleep(philo);
 }
 
 void    *ft_start_philo(void *ptr)
@@ -62,7 +66,6 @@ void    *ft_start_philo(void *ptr)
     // printf("r_forks: %d\n",philo->fork_r);
    
     ft_take_forks(philo);
-    ft_print_thinking(philo);
 
     return (NULL);
 }

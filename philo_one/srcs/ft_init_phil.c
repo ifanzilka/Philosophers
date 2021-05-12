@@ -50,26 +50,19 @@ static  int ft_init_mutexs(t_mutex *mutex_forks, int cnt,  t_ph_param *ph_param)
     return (0);
 }
 
-void *print(void *a)
-{
-    (void)a;
-    write(1, "In thread\n", 10);
-    return NULL;
-}
-
 static int ft_create_threads(t_philo *arr_philo, t_ph_param *ph_param, int cnt)
 {
-    t_timeval	timeeval;
     int         i;
     int         res;
 
-    gettimeofday(&timeeval, NULL);
-    ph_param->start_time = timeeval.tv_usec;
+    ph_param->start_time = ft_get_time();
     i = 0;
     while (i < cnt)
     {
         arr_philo[i].param = ph_param;
+        arr_philo[i].cnt_eatings = 0;
         arr_philo[i].num = i;
+        arr_philo[i].time_last_eat = ph_param->start_time;
         res = pthread_create(&arr_philo[i].thread, NULL ,/*fun*/ ft_start_philo, &arr_philo[i]);
         if (res != 0)
         {

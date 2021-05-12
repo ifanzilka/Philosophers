@@ -42,6 +42,8 @@ typedef struct s_philo
 	int			status;
 	int			fork_l;
 	int 		fork_r;
+	long		time_last_eat;
+	int			cnt_eatings;
 }				t_philo;
 
 t_philo		*arr_philo;
@@ -85,10 +87,17 @@ int		ft_parse(int argc, char **argv, t_ph_param *philo);
 
 void    ft_cr_th_philo(t_ph_param *ph_param);
 void    *ft_start_philo(void *ptr);
-long  	ft_get_usec();
+long	ft_get_time(void);
+void    ft_usleep_fix(long time);
 
 void    ft_print_forks(t_philo *philo);
 void    ft_print_eating(t_philo *philo);
 void    ft_print_thinking(t_philo *philo);
+void	ft_print_sleep(t_philo *philo);
+void    ft_print_die(t_philo *philo);
+
+void    ft_take_forks(t_philo *philo);
+void    ft_philo_sleep(t_philo *philo);
+void    ft_philo_thinking(t_philo *philo);
 
 #endif
