@@ -100,4 +100,6 @@ void    ft_take_forks(t_philo *philo);
 void    ft_philo_sleep(t_philo *philo);
 void    ft_philo_thinking(t_philo *philo);
 
+void    ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param);
+
 #endif

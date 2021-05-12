@@ -47,11 +47,14 @@ void    ft_take_forks(t_philo *philo)
     ft_print_forks(philo);
     ft_print_eating(philo);
     ft_usleep_fix(philo->param->time_to_eat);
+    philo->cnt_eatings++;
     philo->time_last_eat = ft_get_time();
     pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
     pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
     philo->param->fork_status[philo->fork_l] = available;
     philo->param->fork_status[philo->fork_r] = available;
+    if (philo->param->cnt_eat != -1 && philo->cnt_eatings == philo->param->cnt_eat)
+        return ;
     ft_philo_sleep(philo);
 }
 
@@ -61,11 +64,6 @@ void    *ft_start_philo(void *ptr)
 
     philo = ptr;
     ft_init_forks(philo);
-    // printf("num thread %d\n", philo->num);
-    // printf("l_forks: %d\n",philo->fork_l);
-    // printf("r_forks: %d\n",philo->fork_r);
-   
     ft_take_forks(philo);
-
     return (NULL);
 }

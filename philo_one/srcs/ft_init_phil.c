@@ -91,4 +91,7 @@ void    ft_cr_th_philo(t_ph_param *ph_param)
     if (res != 0)
         return ;  
     ft_wait_thread(ph_param->num_philo, arr_philo);
+    ft_free_and_destroy(arr_philo, ph_param);
+    while (1)
+        ;
 }
