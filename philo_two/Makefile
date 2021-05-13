@@ -63,7 +63,7 @@ test4: $(NAME)
 	./philo_two 4 310 200 100
 
 clean:
-		rm $(OBJS) 
+		rm -rf $(OBJS) 
 		@echo "$(F_GREEN)Object files  delete! $(F_NONE)"
 
 fclean:		clean
