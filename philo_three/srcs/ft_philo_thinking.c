@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_philo_thinking.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 01:12:26 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/05/11 03:32:32 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/05/12 14:03:36 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/05/12 14:03:38 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philosophers.h"
 
-int	main(int argc, char **argv)
+void	ft_philo_thinking(t_philo *philo)
 {
-	t_ph_param	ph_param;
-
-	if (argc < 5 || argc > 6)
-		return (ft_errors(argv_err));
-	else
-	{
-		if (ft_checks(argc, argv) == 1)
-			return (ft_errors(parse_err));
-		else
-		{
-			if (ft_parse(argc, argv, &ph_param) == 1)
-				return (ft_errors(parse_err));
-			ft_cr_th_philo(&ph_param);
-		}	
-	}
-	return (0);
+	if (philo->param->live != 1)
+		return ;
+	ft_print_thinking(philo);
+	ft_take_forks(philo);
 }
