@@ -40,7 +40,7 @@ static int	ft_check_die(t_ph_param *param, t_philo *philo)
 	long	time;
 
 	time = ft_get_time();
-	if (time - philo->time_last_eat > param->time_to_die
+	if (time - philo->time_last_eat - 1 >= param->time_to_die 
 		&& ft_is_cnt_eat(param, philo))
 	{
 		return (1);

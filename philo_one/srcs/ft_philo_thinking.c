@@ -17,6 +17,6 @@ void	ft_philo_thinking(t_philo *philo)
 	if (philo->param->live != 1)
 		return ;
 	ft_print_thinking(philo);
-	ft_usleep_fix(2);
+	//ft_usleep_fix(2);
 	ft_take_forks(philo);
 }
