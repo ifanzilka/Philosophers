@@ -34,7 +34,6 @@ void	ft_take_forks(t_philo *philo)
 	philo->time_last_eat = ft_get_time();
 	ft_usleep_fix(philo->param->time_to_eat);
 	philo->cnt_eatings++;
-	philo->time_last_eat = ft_get_time();
 	sem_post(philo->param->sem_forks);
 	sem_post(philo->param->sem_forks);
 	if (philo->param->cnt_eat != -1

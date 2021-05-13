@@ -33,7 +33,6 @@ void	ft_take_forks(t_philo *philo)
 	ft_print_forks(philo);
 	ft_print_eating(philo);
 	ft_usleep_fix(philo->param->time_to_eat);
-	//philo->time_last_eat = ft_get_time();
 	philo->cnt_eatings++;
 	pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
 	pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
