@@ -16,13 +16,14 @@ CC		= gcc
 
 HEADERS	= ./includes
 
-FLAGS	= -Wall -Wextra -Werror 
+FLAGS	= -Wall -Wextra -Werror -pthread 
 
 OBJS	= $(SRCS:.c=.o)
 
 DIR		= ./srcs/
 
-SRCS = $(addprefix $(DIR),ft_error.c ft_parse.c main.c)
+SRCS = $(addprefix $(DIR),ft_error.c ft_parse.c  ft_init_phil.c ft_start_philo.c \
+			ft_free_and_destroy.c ft_other_print.c  ft_philo_sleep.c ft_philo_thinking.c ft_time.c main.c)
 
 OBJS	= $(SRCS:.c=.o)
 

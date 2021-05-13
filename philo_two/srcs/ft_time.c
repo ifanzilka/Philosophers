@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo_sleep.c                                   :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 13:58:02 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/05/12 13:58:04 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/05/12 14:21:52 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/05/12 14:21:53 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philosophers.h"
 
-void	ft_philo_sleep(t_philo *philo)
+long	ft_get_time(void)
 {
-	ft_print_sleep(philo);
-	ft_usleep_fix(philo->param->time_to_sleep);
-	ft_philo_thinking(philo);
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000));
+}
+
+void	ft_usleep_fix(long time)
+{
+	long	t;
+
+	t = ft_get_time();
+	while (ft_get_time() - t < time)
+		usleep(1);
 }

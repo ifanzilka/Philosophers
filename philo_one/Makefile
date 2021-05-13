@@ -6,7 +6,7 @@
 #    By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/11 04:32:49 by bmarilli          #+#    #+#              #
-#    Updated: 2021/05/11 04:32:53 by bmarilli         ###   ########.fr        #
+#    Updated: 2021/05/13 02:17:29 by bmarilli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS	= $(SRCS:.c=.o)
 DIR		= ./srcs/
 
 SRCS = $(addprefix $(DIR),ft_error.c ft_parse.c  ft_init_phil.c ft_start_philo.c \
-			ft_free_and_destroy.c ft_other_print.c  ft_philo_sleep.c ft_philo_thinking.c ft_time.c main.c)
+			ft_free_and_destroy.c ft_other_print.c  ft_philo_sleep.c ft_philo_thinking.c ft_time.c ft_check_live.c main.c)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -50,6 +50,17 @@ $(OBJS): %.o:%.c  ./includes/ft_philosophers.h
 	$(CC) $(FLAGS) -I$(HEADERS) -c $< -o $@
 	@echo "$(F_BLUE)Object files in ready! $(F_NONE)"
 
+test1: $(NAME)
+	./philo_one 5 800 200 200
+
+test2: $(NAME)
+	./philo_one 5 800 200 200 7
+
+test3: $(NAME)
+	./philo_one 4 410 200 200
+
+test4: $(NAME)
+	./philo_one 4 310 200 100
 
 clean:
 		rm $(OBJS) 

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo_sleep.c                                   :+:      :+:    :+:   */
+/*   ft_free_and_destroy.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarilli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 13:58:02 by bmarilli          #+#    #+#             */
-/*   Updated: 2021/05/12 13:58:04 by bmarilli         ###   ########.fr       */
+/*   Created: 2021/05/12 16:45:03 by bmarilli          #+#    #+#             */
+/*   Updated: 2021/05/12 17:01:19 by bmarilli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philosophers.h"
 
-void	ft_philo_sleep(t_philo *philo)
+void	ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param)
 {
-	ft_print_sleep(philo);
-	ft_usleep_fix(philo->param->time_to_sleep);
-	ft_philo_thinking(philo);
+	(void)param;
+	int		i;
+
+	i = 0;
+	free(arr_philo);
+	sem_close(param->sem_forks);
+	sem_close(param->sem_print);
 }

@@ -29,5 +29,7 @@ int	main(int argc, char **argv)
 			ft_cr_th_philo(&ph_param);
 		}	
 	}
+	// while (1)
+	// 	;
 	return (0);
 }

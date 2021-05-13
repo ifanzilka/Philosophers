@@ -49,7 +49,7 @@ int	ft_atoi(const char *ptr)
 int	ft_checks(int argc, char **argv)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 1;
 	while (i < argc)
@@ -66,11 +66,12 @@ int	ft_checks(int argc, char **argv)
 	return (0);
 }
 
-int	ft_parse(int argc, char **argv, t_philosof *philo)
+int	ft_parse(int argc, char **argv, t_ph_param *philo)
 {
-	int i;
+	int	i;
 
 	i = 1;
+	philo->cnt_eat = -1;
 	while (i < argc)
 	{
 		if (i == 1)
@@ -82,11 +83,11 @@ int	ft_parse(int argc, char **argv, t_philosof *philo)
 		else if (i == 4)
 			philo->time_to_sleep = ft_atoi(argv[i]);
 		else if (i == 5)
-			philo->cnt_eat = ft_atoi(argv[i]);	
+			philo->cnt_eat = ft_atoi(argv[i]);
 		i++;
 	}
-	if (philo->num_philo == 0 || philo->time_to_die == 0 || 
-			philo->time_to_eat == 0 || philo->time_to_sleep == 0)
-			return (1);	
+	if (philo->num_philo < 2 || philo->time_to_die == 0
+		|| philo->time_to_eat == 0 || philo->time_to_sleep == 0)
+		return (1);
 	return (0);
 }
