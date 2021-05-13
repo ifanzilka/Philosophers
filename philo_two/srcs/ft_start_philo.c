@@ -26,30 +26,17 @@ void	ft_init_forks(t_philo *philo)
 
 void	ft_take_forks(t_philo *philo)
 {
-	long	time;
-
 	sem_wait(philo->param->sem_forks);
+	ft_print_forks(philo);
 	sem_wait(philo->param->sem_forks);
-	time = ft_get_time();
-	if (time - philo->time_last_eat > philo->param->time_to_die)
-	{
-		ft_print_die(philo);
-		philo->param->live = 0;
-		sem_post(philo->param->sem_forks);
-		sem_post(philo->param->sem_forks);
-		//pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
-		//pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
-		return ;
-	}
 	ft_print_forks(philo);
 	ft_print_eating(philo);
+	philo->time_last_eat = ft_get_time();
 	ft_usleep_fix(philo->param->time_to_eat);
 	philo->cnt_eatings++;
 	philo->time_last_eat = ft_get_time();
 	sem_post(philo->param->sem_forks);
 	sem_post(philo->param->sem_forks);
-	//pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_l]);
-	//pthread_mutex_unlock(&philo->param->mutex_forks[philo->fork_r]);
 	if (philo->param->cnt_eat != -1
 		&& philo->cnt_eatings == philo->param->cnt_eat)
 		return ;

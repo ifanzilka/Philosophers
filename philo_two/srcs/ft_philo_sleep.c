@@ -14,19 +14,9 @@
 
 void	ft_philo_sleep(t_philo *philo)
 {
-	ft_print_sleep(philo);
-	if (philo->param->time_to_sleep > philo->param->time_to_die)
-	{
-		ft_usleep_fix(philo->param->time_to_die);
-		ft_print_die(philo);
-		philo->param->live = 0;
-		sem_post(philo->param->sem_forks);
-		sem_post(philo->param->sem_forks);
+	if (philo->param->live != 1)
 		return ;
-	}
-	else
-	{
-		ft_usleep_fix(philo->param->time_to_sleep);
-		ft_philo_thinking(philo);
-	}	
+	ft_print_sleep(philo);
+	ft_usleep_fix(philo->param->time_to_sleep);
+	ft_philo_thinking(philo);
 }

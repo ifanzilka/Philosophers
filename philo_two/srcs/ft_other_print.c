@@ -31,11 +31,11 @@ void	ft_print_eating(t_philo *philo)
 
 	if (philo->param->live != 1)
 		return ;
-	sem_wait(philo->param->sem_print);	
+	sem_wait(philo->param->sem_print);
 	time = ft_get_time();
 	printf("%ld\tPhilo %d  is eating\n", time - philo->param->start_time,
 		philo->num + 1);
-	sem_post(philo->param->sem_print);	
+	sem_post(philo->param->sem_print);
 }
 
 void	ft_print_thinking(t_philo *philo)
@@ -48,7 +48,7 @@ void	ft_print_thinking(t_philo *philo)
 	time = ft_get_time();
 	printf("%ld\tPhilo %d  is thinking\n", time - philo->param->start_time,
 		philo->num + 1);
-	sem_post(philo->param->sem_print);	
+	sem_post(philo->param->sem_print);
 }
 
 void	ft_print_sleep(t_philo *philo)
@@ -61,18 +61,16 @@ void	ft_print_sleep(t_philo *philo)
 	time = ft_get_time();
 	printf("%ld\tPhilo %d  is sleep\n", time - philo->param->start_time,
 		philo->num + 1);
-	sem_post(philo->param->sem_print);	
+	sem_post(philo->param->sem_print);
 }
 
 void	ft_print_die(t_philo *philo)
 {
 	long	time;
 
-	if (philo->param->live != 1)
-		return ;
-	sem_wait(philo->param->sem_print);	
+	sem_wait(philo->param->sem_print);
 	time = ft_get_time();
 	printf("\033[31m%ld\tPhilo %d died\n\033[37m", time - philo->param->start_time,
 		philo->num + 1);
-	sem_post(philo->param->sem_print);	
+	sem_post(philo->param->sem_print);
 }

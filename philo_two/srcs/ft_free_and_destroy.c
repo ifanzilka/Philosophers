@@ -14,7 +14,6 @@
 
 void	ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param)
 {
-	(void)param;
 	int		i;
 
 	i = 0;

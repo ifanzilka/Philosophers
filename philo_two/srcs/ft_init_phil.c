@@ -45,15 +45,14 @@ static int	ft_create_threads(t_philo *arr_philo, t_ph_param *ph_param, int cnt)
 		arr_philo[i].time_last_eat = ft_get_time();
 		res = pthread_create(&arr_philo[i].thread, NULL,
 				ft_start_philo, &arr_philo[i]);
-		ft_usleep_fix(10);
+		usleep(1);
 		if (res != 0)
 		{
 			return (ft_errors(pthread_create_err));
 		}
-		i += 2;
-		if (i >= cnt && i % 2 == 0)
-			i = 1;
+		i++;
 	}
+	pthread_create(&ph_param->th_in_live, NULL, ft_check_live, arr_philo);
 	return (0);
 }
 
@@ -69,7 +68,8 @@ void	ft_cr_th_philo(t_ph_param *ph_param)
 		return ;
 	sem_unlink("/forks");
 	sem_unlink("/print");
-	ph_param->sem_forks = sem_open("/forks", O_CREAT, 0644, ph_param->num_philo);
+	ph_param->sem_forks = sem_open("/forks", O_CREAT, 0644,
+			ph_param->num_philo);
 	ph_param->sem_print = sem_open("/print", O_CREAT, 0644, 1);
 	res = ft_create_threads(arr_philo, ph_param, ph_param->num_philo);
 	if (res != 0)

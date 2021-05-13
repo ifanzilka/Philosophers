@@ -29,8 +29,9 @@ typedef struct s_ph_param
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			cnt_eat;
-	sem_t		*sem_forks;
 	int			*fork_status;
+	pthread_t	th_in_live;
+	sem_t		*sem_forks;
 	sem_t		*sem_print;
 	long		start_time;
 }				t_ph_param;
@@ -108,5 +109,6 @@ void	ft_print_die(t_philo *philo);
 void	ft_take_forks(t_philo *philo);
 void	ft_philo_sleep(t_philo *philo);
 void	ft_philo_thinking(t_philo *philo);
+void	*ft_check_live(void *ptr);
 
 #endif

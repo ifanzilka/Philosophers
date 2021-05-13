@@ -23,7 +23,7 @@ OBJS	= $(SRCS:.c=.o)
 DIR		= ./srcs/
 
 SRCS = $(addprefix $(DIR),ft_error.c ft_parse.c  ft_init_phil.c ft_start_philo.c \
-			ft_free_and_destroy.c ft_other_print.c  ft_philo_sleep.c ft_philo_thinking.c ft_time.c main.c)
+			ft_free_and_destroy.c ft_other_print.c  ft_philo_sleep.c ft_philo_thinking.c ft_time.c ft_check_live.c main.c)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -50,6 +50,17 @@ $(OBJS): %.o:%.c  ./includes/ft_philosophers.h
 	$(CC) $(FLAGS) -I$(HEADERS) -c $< -o $@
 	@echo "$(F_BLUE)Object files in ready! $(F_NONE)"
 
+test1: $(NAME)
+	./philo_two 5 800 200 200
+
+test2: $(NAME)
+	./philo_two 5 800 200 200 7
+
+test3: $(NAME)
+	./philo_two 4 410 200 200
+
+test4: $(NAME)
+	./philo_two 4 310 200 100
 
 clean:
 		rm $(OBJS) 
@@ -77,3 +88,4 @@ code:
 	@echo "$(F_BLUE)   11011010**$(F_NONE)"
 
 .PHONY:     all clean fclean re bonus code
+
