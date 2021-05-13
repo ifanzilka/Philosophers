@@ -27,4 +27,5 @@ void	ft_free_and_destroy(t_philo *arr_philo, t_ph_param *param)
 	sem_close(param->sem_forks);
 	sem_close(param->sem_print);
 	sem_close(param->sem_live);
+	sem_close(param->sem_flag_for_live);
 }

@@ -12,7 +12,7 @@
 
 #include "ft_philosophers.h"
 
-static void *ft_check_live_ph(void *ptr)
+static void	*ft_check_live_ph(void *ptr)
 {
 	t_philo		*philo;
 	t_ph_param	*param;
@@ -23,12 +23,12 @@ static void *ft_check_live_ph(void *ptr)
 	{
 		if (ft_get_time() - philo->time_last_eat - 1 > param->time_to_die)
 		{
+			sem_wait(param->sem_flag_for_live);
 			param->live = 0;
 			ft_print_die(philo);
 			sem_post(param->sem_live);
 			return (NULL);
 		}
-		//usleep(1);
 	}
 	return (NULL);
 }
@@ -54,7 +54,7 @@ void	ft_take_forks(t_philo *philo)
 void	*ft_start_philo(void *ptr)
 {
 	t_philo		*philo;
-	pthread_t 	in_live;
+	pthread_t	in_live;
 
 	philo = ptr;
 	philo->time_last_eat = ft_get_time();

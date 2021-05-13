@@ -35,6 +35,7 @@ typedef struct s_ph_param
 	sem_t		*sem_forks;
 	sem_t		*sem_print;
 	sem_t		*sem_live;
+	sem_t		*sem_flag_for_live;
 	long		start_time;
 }				t_ph_param;
 

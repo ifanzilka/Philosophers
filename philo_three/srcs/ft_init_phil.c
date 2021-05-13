@@ -14,10 +14,10 @@
 
 static void	*ft_wait_thread(void *ph_param)
 {
-	t_ph_param *param;
-	int	i;
-	int status;
-	int cnt;
+	t_ph_param	*param;
+	int			i;
+	int			status;
+	int			cnt;
 
 	param = ph_param;
 	cnt = param->num_philo;
@@ -31,10 +31,10 @@ static void	*ft_wait_thread(void *ph_param)
 	return (NULL);
 }
 
-static int ft_create_forks(t_philo *arr_philo, t_ph_param *ph_param)
+static int	ft_create_forks(t_philo *arr_philo, t_ph_param *ph_param)
 {
 	int		i;
-	pid_t pid;
+	pid_t	pid;
 
 	i = 0;
 	ph_param->start_time = ft_get_time();
@@ -62,7 +62,8 @@ static int ft_create_forks(t_philo *arr_philo, t_ph_param *ph_param)
 
 void	ft_cr_th_philo(t_ph_param *ph_param)
 {
-	t_philo	*arr_philo;
+	t_philo		*arr_philo;
+	pthread_t	lives;
 
 	ph_param->live = 1;
 	arr_philo = malloc(sizeof(t_philo) * ph_param->num_philo);
@@ -72,13 +73,14 @@ void	ft_cr_th_philo(t_ph_param *ph_param)
 	sem_unlink("/forks");
 	sem_unlink("/print");
 	sem_unlink("/live");
+	sem_unlink("/flag_live");
 	ph_param->sem_forks = sem_open("/forks", O_CREAT, 0644,
 			ph_param->num_philo);
 	ph_param->sem_print = sem_open("/print", O_CREAT, 0644, 1);
 	ph_param->sem_live = sem_open("/live", O_CREAT, 0644, 0);
-	ph_param->live = 1;	
+	ph_param->sem_flag_for_live = sem_open("/flag_live", O_CREAT, 0644, 1);
+	ph_param->live = 1;
 	ft_create_forks(arr_philo, ph_param);
-	pthread_t lives;
 	pthread_create(&lives, NULL, ft_wait_thread, ph_param);
 	ft_free_and_destroy(arr_philo, ph_param);
 }
