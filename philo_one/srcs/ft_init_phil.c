@@ -64,7 +64,7 @@ static int	ft_create_threads(t_philo *arr_philo, t_ph_param *ph_param, int cnt)
 		arr_philo[i].time_last_eat = ft_get_time();
 		res = pthread_create(&arr_philo[i].thread, NULL,
 				ft_start_philo, &arr_philo[i]);
-		usleep(10);
+		usleep(30);
 		if (res != 0)
 		{
 			return (ft_errors(pthread_create_err));
